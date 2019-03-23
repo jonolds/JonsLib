@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="jonslib/jonslib.jar"/>
+    <options buildIfNeeded="true" compress="false" descriptionLocation="/jonslib/makejar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/jonslib/.project"/>
+        <folder path="/jonslib/src"/>
+        <folder path="/jonslib/target"/>
+        <file path="/jonslib/.classpath"/>
+        <file path="/jonslib/pom.xml"/>
+        <javaElement handleIdentifier="=jonslib/src\/main\/java"/>
+    </selectedElements>
+</jardesc>
