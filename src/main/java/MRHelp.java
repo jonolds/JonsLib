@@ -7,7 +7,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterators;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
@@ -32,7 +35,7 @@ public class MRHelp extends Configured {
 			new Path(outFolder).getFileSystem(conf).delete(new Path(outFolder), true);
 		}
 		String output = outputStringsList.stream().collect(Collectors.joining("\n"));
-		FileUtils.writeStringToFile(new File(outDirPrefix + File.separator + "outAll6.txt"), output, "UTF-8", true);
+		FileUtils.writeStringToFile(new File(outDirPrefix + File.separator + "outAll.txt"), output, "UTF-8", true);
 	}
 
 	static String getCombinedOutputsInFolderAsString(Configuration conf, String outFolder) throws IOException {
@@ -56,6 +59,10 @@ public class MRHelp extends Configured {
 		return vals;
 	}
 	
+	static <T> Stream<T> iterFiniteStream(final Iterator<T> iterator) {
+	    return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, 0), false);
+	}
+	
 	static <T>String pre(T orig, int num) {
 		String spaces = "";
 		for(int i = 0; i < num-orig.toString().length(); i++)
@@ -64,24 +71,12 @@ public class MRHelp extends Configured {
 	}
 	
 	static <T>String post(T orig, int num) {
-		String spaces = "";
-		if(orig == null) {
-			for(int i = 0; i < num; i++)
-				spaces += " ";
-			return spaces;
-		}
-		else {
-			for(int i = 0; i < num-orig.toString().length(); i++)
-				spaces += " ";
-			return orig + spaces;
-		}
+		String spaces = "", origStr = (orig == null) ? "" : orig.toString();
+		for(int i = 0; i < num-origStr.length(); i++)
+			spaces += " ";
+		return origStr + spaces;
 	}
 	
-	static <T>void println(T t) {
-		System.out.println(t.toString()); 
-	}
-	
-	static <T>void print(T t) {
-		System.out.print(t.toString());
-	}
+	static <T>void println(T t) { System.out.println(t.toString()); }
+	static <T>void print(T t) { System.out.print(t.toString()); }
 }
